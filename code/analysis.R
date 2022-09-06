@@ -13,17 +13,15 @@ here("data/processed") %>%
   )) %>%
   imap(~ assign(..2, ..1, envir = .GlobalEnv))
 
-
-processed_data <- 
-combined_data %>% 
+processed_data <-
+combined_data %>%
   mutate(year = year(timestamp),
          month = month(timestamp),
          day = day(timestamp),
          hour = hour(timestamp),
-         minute = minute(timestamp)) 
-
+         minute = minute(timestamp))
 
 processed_data %>%
   group_by(id_group) %>%
   summarise(avg_activity = mean(activity),
-            sd_activity = sd(activity)) %>% view
+            sd_activity = sd(activity))

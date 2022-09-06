@@ -17,7 +17,10 @@ motor_activity_data <- here("data/raw") %>%
     "[\\w-]+\\.[\\w-]*$"
   )) %>%
   select(-date) %>%
-  mutate(id_participant_group = str_remove(id_participant_group, "\\.csv$")) %>%
+  mutate(id_participant_group = str_remove(
+    id_participant_group,
+    "\\.csv$")
+    ) %>%
   separate(
     id_participant_group,
     into = c("id_group", "id_participant"),
@@ -25,7 +28,11 @@ motor_activity_data <- here("data/raw") %>%
   ) %>%
   mutate(
     id_participant = as.numeric(id_participant),
-    id_participant = if_else(id_group == "condition", id_participant + 32, id_participant),
+    id_participant = if_else(
+      id_group == "condition",
+      id_participant + 32,
+      id_participant
+      ),
     id_participant = as.character(id_participant),
     id_participant = str_pad(id_participant, pad = "0", width = 2)
   ) %>%
@@ -46,19 +53,47 @@ madrs_data <- here("data/raw") %>%
   ) %>%
   mutate(
     id_participant = as.numeric(id_participant),
-    id_participant = if_else(id_group == "condition", id_participant + 32, id_participant),
+    id_participant = if_else(
+      id_group == "condition",
+      id_participant + 32,
+      id_participant
+      ),
     id_participant = as.character(id_participant),
     id_participant = str_pad(id_participant, pad = "0", width = 2)
   ) %>%
   mutate(
-    gender = factor(gender, levels = c(1, 2), labels = c("female", "male")),
+    gender = factor(
+      gender,
+      levels = c(1, 2),
+      labels = c("female", "male")
+      ),
     age = factor(age),
-    afftype = factor(afftype, levels = c(1:3), labels = c("bipolar II", "unipolar depressive", "bipolar I")),
-    melanch = factor(melanch, levels = c(1, 2), labels = "melancholia", "no melancholia"),
-    inpatient = factor(inpatient, levels = c(1, 2), labels = c("inpatient", "outpatient")),
+    afftype = factor(
+      afftype,
+      levels = c(1:3),
+      labels = c("bipolar II", "unipolar depressive", "bipolar I")
+    ),
+    melanch = factor(
+      melanch,
+      levels = c(1, 2),
+      labels = "melancholia", "no melancholia"
+      ),
+    inpatient = factor(
+      inpatient,
+      levels = c(1, 2),
+      labels = c("inpatient", "outpatient")
+      ),
     edu = factor(edu),
-    marriage = factor(marriage, levels = c(1, 2), labels = c("married or cohabiting", "singe")),
-    work = factor(work, levels = c(1, 2), labels = c("working or studying", "unemployed/sick/leave/pension"))
+    marriage = factor(
+      marriage,
+      levels = c(1, 2),
+      labels = c("married or cohabiting", "singe")
+    ),
+    work = factor(
+      work,
+      levels = c(1, 2),
+      labels = c("working or studying", "unemployed/sick/leave/pension")
+      )
   ) %>%
   rename(madrs_started = madrs1, madrs_stopped = madrs2) %>%
   arrange(id_participant)
