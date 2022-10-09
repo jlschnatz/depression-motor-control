@@ -1,0 +1,31 @@
+---
+title: "Feature Engineering"
+author: "Jan Luca Schnatz"
+theme: simplex
+format: html
+editor: visual
+---
+
+## Included Features
+
+-   **L5**: Average activity during the least active 5 hours. All days of data are overlaid and averaged in 24-hour periods. The L5 average provides the average activity level for the sequence of the least five active hours. This value provides an indication of how restful (inactive) and regular the sleep periods are.
+
+-   **L5 Start Hour:** Indicates the onset of the L5 sequence and provides an indication of the phase of the most restful hours.
+
+-   **M10 Start Hour:** Indicates the onset of the M10 sequence and provides an indication of the phase of the most active hours.
+
+-   **M10**: Average activity during the most active 10 hours. All days of data are overlaid and averaged in 24-hour periods. The M10 average provides the average activity level for the sequence of the highest (most) ten active hours. This value provides an indication of how active and regular the wake periods are.
+
+-   **RA: Relative amplitude** $$ RA = \dfrac {M10 - L5}{M10 + L5}$$
+
+-   **IV: Intradaily variability**
+
+    -   *Characteristic:* quantifies the degree of fragmentation of activity-rest periods. Typical healthy subjects will show a single prolonged activity period and a single prolonged rest period per 24 hour cycle. Certain physiological conditions may lead to multiple short-length periods of activity-rest within any 24 hour period. The variable has a theoretical range of 0 to 2 with higher values indicating higher fragmentation. Typical values for healthy subjects will be below 1.
+
+    -   *Formula:* $$ IV = \dfrac {N \sum_{i = 2}^{p}(X_i - X_{i-1})^2}{p \sum_{i = 1}^{N}(X_i - \bar{X})^2}$$
+
+-   **IS: Intradaily stability**
+
+    -   *Characteristic:* quantifies the degree of regularity in the Activity-Rest pattern with a range of 0 to 1 where a value of 0 indicates a total lack of rhythm and a value of 1 indicates a perfectly stable rhythm
+
+    -   *Formula:* $$ IS = \dfrac{N \sum_{h = 1}^p {(\bar{X}_h - \bar{X})}^2}{p \sum_{i = 1}^{N}(X_i - \bar{X})^2}$$
